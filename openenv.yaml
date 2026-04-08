@@ -1,0 +1,17 @@
+name: sql-debug-env
+description: SQL debugging environment for AI agents
+
+version: 1.0
+
+actions:
+  - sql_query: string
+
+observations:
+  - problem: string
+  - db_schema: string
+  - last_error: string
+  - query_result: string
+
+rewards:
+  - score: float
+  - feedback: string
