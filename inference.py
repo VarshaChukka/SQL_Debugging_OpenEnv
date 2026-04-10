@@ -65,7 +65,7 @@ def run_task(task_id):
 
         print(
             f"[STEP] step={step_count} action={action} reward={reward:.2f} "
-            f"done={'true' if done else 'false'} error=null"
+            f"done={'true' if done else 'false'} error=\"null\""
         )
 
         success = done
@@ -73,7 +73,7 @@ def run_task(task_id):
     except Exception as e:
         error_msg = str(e).replace("\n", " ")
 
-        # IMPORTANT: still print STEP line
+        # Even on error, must print STEP
         print(
             f"[STEP] step={step_count} action=null reward=0.00 done=false error=\"{error_msg}\""
         )
