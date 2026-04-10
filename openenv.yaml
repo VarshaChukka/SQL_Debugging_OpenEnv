@@ -1,17 +1,37 @@
 name: sql-debug-env
-description: SQL debugging environment for AI agents
-
+description: SQL debugging REPL environment
 version: 1.0
 
-actions:
-  - sql_query: string
+tasks:
+  - id: 0
+    name: easy
+  - id: 1
+    name: medium
+  - id: 2
+    name: hard
 
-observations:
-  - problem: string
-  - db_schema: string
-  - last_error: string
-  - query_result: string
+observation_space:
+  type: object
+  properties:
+    problem:
+      type: string
+    db_schema:
+      type: string
+    last_error:
+      type: string
+    query_result:
+      type: string
 
-rewards:
-  - score: float
-  - feedback: string
+action_space:
+  type: object
+  properties:
+    sql_query:
+      type: string
+
+reward:
+  type: object
+  properties:
+    score:
+      type: number
+    feedback:
+      type: string
