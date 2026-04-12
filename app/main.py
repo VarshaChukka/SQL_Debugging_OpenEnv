@@ -6,14 +6,14 @@ app = FastAPI()
 env = SQLEnv()
 
 
-# ✅ Home
+#Home
 @app.get("/")
 def home():
     return {"message": "SQL OpenEnv Running"}
 
 
-# ✅ Reset (with error handling)
-@app.get("/reset")
+#FIXED: Reset must be POST (not GET)
+@app.post("/reset")
 def reset(task_id: int = 0):
     try:
         return env.reset(task_id)
@@ -21,13 +21,13 @@ def reset(task_id: int = 0):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ✅ Step
+#Step (already correct)
 @app.post("/step")
 def step(action: Action):
     return env.step(action)
 
 
-# ✅ Tasks list
+#Tasks list
 @app.get("/tasks")
 def tasks():
     return {
@@ -39,19 +39,19 @@ def tasks():
     }
 
 
-# ✅ State (OpenEnv requirement)
+#State
 @app.get("/state")
 def state():
     return env.state()
 
 
-# ✅ Grader endpoint (required by checklist)
+#Grader
 @app.get("/grader")
 def grader():
     return {"message": "Grading happens during step execution"}
 
 
-# ✅ Baseline endpoint (required by checklist)
+#Baseline
 @app.get("/baseline")
 def baseline():
     return {"message": "Run inference.py for baseline evaluation"}
