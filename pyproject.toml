@@ -1,0 +1,16 @@
+[project]
+name = "sql-debug-env"
+version = "1.0.0"
+description = "SQL Debugging OpenEnv Environment"
+authors = [{ name = "Varsha" }]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "requests",
+    "openai"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
