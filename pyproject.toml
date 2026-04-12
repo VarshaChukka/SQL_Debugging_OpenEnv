@@ -3,13 +3,19 @@ name = "sql-debug-env"
 version = "1.0.0"
 description = "SQL Debugging OpenEnv Environment"
 authors = [{ name = "Varsha" }]
+
 dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic",
     "requests",
-    "openai"
+    "openai",
+    "openenv-core>=0.2.0"
 ]
+
+#REQUIRED ENTRY POINT
+[project.scripts]
+server = "server.app:app"
 
 [build-system]
 requires = ["setuptools"]
