@@ -42,8 +42,8 @@ def run_task(task_id):
     print(f"[START] task={task_id} env=sql-debug model={MODEL_NAME}")
 
     try:
-        # RESET
-        res = requests.get(f"{BASE_URL}/reset?task_id={task_id}")
+        #FIX: POST instead of GET
+        res = requests.post(f"{BASE_URL}/reset?task_id={task_id}")
         res_json = res.json()
         problem = res_json["problem"]
 
@@ -63,9 +63,10 @@ def run_task(task_id):
 
         rewards.append(f"{reward:.2f}")
 
+        #FIX: error=null (no quotes)
         print(
             f"[STEP] step={step_count} action={action} reward={reward:.2f} "
-            f"done={'true' if done else 'false'} error=\"null\""
+            f"done={'true' if done else 'false'} error=null"
         )
 
         success = done
@@ -73,12 +74,10 @@ def run_task(task_id):
     except Exception as e:
         error_msg = str(e).replace("\n", " ")
 
-        # Even on error, must print STEP
         print(
             f"[STEP] step={step_count} action=null reward=0.00 done=false error=\"{error_msg}\""
         )
 
-    # END (ALWAYS PRINT)
     print(
         f"[END] success={'true' if success else 'false'} "
         f"steps={step_count} rewards={','.join(rewards) if rewards else '0.00'}"
